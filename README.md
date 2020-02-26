@@ -14,20 +14,19 @@ Add it in your root build.gradle at the end of repositories:
 Step 2 Add the dependency
 
 	dependencies {
-	        implementation 'com.github.antinolabsdev:librarybotsdk:Tag'
+	        implementation 'com.github.antinolabsdev:librarybotsdk:0.1.0'
 	}
   
 Step 3 Write compileOptions in
 
-android{
-  compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
+	android{
+	  compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	    }
+	}
 
 Step 4 Added Internet permission
 
-
- <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
