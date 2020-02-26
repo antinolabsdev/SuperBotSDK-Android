@@ -1,0 +1,2 @@
+include ':app', ':superbotsdk2'
+rootProject.name='SuperBotSdk'
