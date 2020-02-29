@@ -1,28 +1,21 @@
-package com.example.sdkbotlibraray;
+package com.example.superbotsdk2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.superbotsdk2.DataHolder;
+import com.example.superbotsdk2.Post;
+import com.example.superbotsdk2.WebViewActivity;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -34,15 +27,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomRelativeLayout extends RelativeLayout implements View.OnClickListener {
 
-    private FloatingActionButton mButton;
+    private ImageButton mButton;
     private LinearLayout linearLayout, linearLayout1;
     private Context context;
     private float TextHeadersize;
     private TextView textViewheader , textViewSubHeader;
     private Response<Post> responseGlob;
-    private String android_id = Settings.Secure.getString(getContext().getContentResolver(),
-            Settings.Secure.ANDROID_ID);
-
 
     public CustomRelativeLayout(Context context) {
         super(context);
@@ -56,7 +46,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
      * @param secret
      */
     public void init(String account, String secret) {
-        Log.e("Response", android_id);
+        Log.e("Response", "inIt: working");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://app.superbot.works")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -93,7 +83,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
     }
     private void initViews(Response<Post> response) {
 
-        if(response.body().getWidgetPosition().equalsIgnoreCase("left"))
+        if(response.body().getWidgetPosition().equalsIgnoreCase("right"))
         {
             LayoutParams bparams = new LayoutParams(
                     LayoutParams.WRAP_CONTENT,
@@ -106,36 +96,52 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-           // linearParams.setMargins(0, 0, 0, 20);
+            linearParams.setMargins(10, 0, 30, 10);
             linearLayout = new LinearLayout(context);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setLayoutParams(linearParams);
-
-           // linearParams1.setMargins(0, 4, 30, 10);
+            LinearLayout.LayoutParams linearParams1 = new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT
+            );
+            linearParams1.setMargins(10, 0, 10, 25);
 
             textViewheader = new TextView(context);
+            textViewSubHeader = new TextView(context);
             if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
-                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + response.body().getHeaderTitle() + "</font>"));
+                textViewSubHeader.setText(response.body().getHeaderTitle());
+                textViewSubHeader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 6f);
+                String subHeading = textViewSubHeader.getText().toString();
+                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + subHeading + "</font>"));
                 textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
-                textViewheader.setPadding(30, 30, 80, 30);
+                textViewheader.setPadding(30, 30, 30, 30);
+               // textViewheader.setBackgroundColor(getResources().getColor(R.color.titlecolor));
                 textViewheader.setBackgroundResource(R.drawable.background_textview);
                 textViewheader.setLayoutParams(linearParams);
-
-                mButton = new FloatingActionButton(context);
+                textViewheader.setLayoutParams(linearParams1);
+                textViewheader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mButton = new ImageButton(context);
                 mButton.setId((int) 0X101);
-                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).resize(600,600).into(mButton);
+                //  mButton.setBackgroundResource(R.drawable.round_button);
 
-                LinearLayout.LayoutParams linearParams1 = new LinearLayout.LayoutParams(
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT
-                );
-                mButton.setLayoutParams(linearParams1);
+
+                GradientDrawable shape = new GradientDrawable();
+                shape.setShape(GradientDrawable.OVAL);
+                shape.setSize(150, 150);
+                shape.setColor(Color.parseColor(response.body().getMainColor()));
+                shape.setStroke(2, Color.BLACK);
+                mButton.setBackground(shape);
+
+                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+
+
+                //mButton.setBackgroundColor();
+
+                mButton.setLayoutParams(linearParams);
                 mButton.setOnClickListener(this);
                 linearLayout.setLayoutParams(bparams);
                 linearLayout.addView(textViewheader);
                 linearLayout.addView(mButton);
-
 
                 addView(linearLayout);
 
@@ -144,7 +150,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
 
         }
 
-        if(response.body().getWidgetPosition().equalsIgnoreCase("right"))
+        if(response.body().getWidgetPosition().equalsIgnoreCase("left"))
         {
             LayoutParams bparams = new LayoutParams(
                     LayoutParams.WRAP_CONTENT,
@@ -157,11 +163,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginTop = 6;
-            int dpValueTopMargin = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTop, context.getResources().getDisplayMetrics());
-            linearParams.setMargins(0, 0, 0, dpValueTopMargin);
+            linearParams.setMargins(10, 0, 30, 10);
             linearLayout = new LinearLayout(context);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setLayoutParams(linearParams);
@@ -169,67 +171,45 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginLeft = 5;
-            int dpvalueMarginLeft = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginLeft, context.getResources().getDisplayMetrics());
-            int valueMarginTopButton = 0;
-            int dpvalueMarginTopButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTopButton, context.getResources().getDisplayMetrics());
-            int valueMarginBottomButton = 1;
-            int dpvalueMarginBottomButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginBottomButton, context.getResources().getDisplayMetrics());
-            linearParams1.setMargins(dpvalueMarginLeft, dpvalueMarginTopButton, 0, dpvalueMarginBottomButton);
+            linearParams1.setMargins(10, 0, 10, 25);
 
             textViewheader = new TextView(context);
             textViewSubHeader = new TextView(context);
             if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
-
                 textViewSubHeader.setText(response.body().getHeaderTitle());
+                textViewSubHeader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 6f);
                 String subHeading = textViewSubHeader.getText().toString();
                 textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + subHeading + "</font>"));
                 textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
-
-                int value1 = 30;
-                int dpValueLeft = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        value1, context.getResources().getDisplayMetrics());
-
-                int value2 = 10;
-                int dpValueTop = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        value2,
-                        context.getResources().getDisplayMetrics());
-                int value3 = 10;
-                int dpValueRight = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        value3,
-                        context.getResources().getDisplayMetrics());
-                int value4 = 10;
-                int dpValueBottom = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        value4,
-                        context.getResources().getDisplayMetrics());
-                textViewheader.setPadding(dpValueLeft, dpValueTop, dpValueRight, dpValueBottom);
-                textViewheader.setBackgroundResource(R.drawable.background_left_textview);
+                textViewheader.setPadding(30, 30, 30, 30);
+               // textViewheader.setBackgroundColor(getResources().getColor(R.color.titlecolor));
+                textViewheader.setBackgroundResource(R.drawable.background_textview);
                 textViewheader.setLayoutParams(linearParams);
-
-
-                mButton = new FloatingActionButton(context);
+                textViewheader.setLayoutParams(linearParams1);
+                textViewheader.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                mButton = new ImageButton(context);
                 mButton.setId((int) 0X101);
-                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+                  mButton.setBackgroundResource(R.drawable.round_button);
+
+
+                GradientDrawable shape = new GradientDrawable();
+                shape.setShape(GradientDrawable.OVAL);
+                shape.setSize(150, 150);
+                shape.setColor(Color.parseColor(response.body().getMainColor()));
+                shape.setStroke(2, Color.BLACK);
+                mButton.setBackground(shape);
 
                 Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
 
 
+                //mButton.setBackgroundColor();
 
-                mButton.setLayoutParams(linearParams1);
+                mButton.setLayoutParams(linearParams);
                 mButton.setOnClickListener(this);
                 linearLayout.setLayoutParams(bparams);
                 linearLayout.addView(mButton);
                 linearLayout.addView(textViewheader);
+
 
                 addView(linearLayout);
 
@@ -241,7 +221,6 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
     }
 
 
-
     private ImageButton getButton() {
         return mButton;
     }
@@ -251,7 +230,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
         switch (v.getId()){
             case 0X101:
                 if (responseGlob!=null)
-                    context.startActivity(new Intent(context, WebViewActivity.class).putExtra("webview",responseGlob.body().getWidgetUrl()+"&udid=android."+android_id));
+                context.startActivity(new Intent(context, WebViewActivity.class).putExtra("webview",responseGlob.body().getWidgetUrl()));
 
                 break;
             case 0X102:

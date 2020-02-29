@@ -1,16 +1,13 @@
-package com.example.sdkbotlibraray;
+package com.example.superbotsdk2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 
 public class WebViewActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -19,10 +16,6 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-               this.getWindow()
-                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         setContentView(R.layout.activity_web_view);
         mWebView = findViewById(R.id.webview);
         iv_close = findViewById(R.id.iv_close);
@@ -33,9 +26,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setBuiltInZoomControls(true);
         mWebView.getSettings().setDisplayZoomControls(false);
-        mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        mWebView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.getSettings().setJavaScriptEnabled(true);
 
