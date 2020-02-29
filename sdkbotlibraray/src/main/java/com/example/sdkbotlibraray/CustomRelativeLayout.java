@@ -99,57 +99,6 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT);
             bparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            bparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
-
-            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT
-            );
-           // linearParams.setMargins(0, 0, 0, 20);
-            linearLayout = new LinearLayout(context);
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-            linearLayout.setLayoutParams(linearParams);
-
-           // linearParams1.setMargins(0, 4, 30, 10);
-
-            textViewheader = new TextView(context);
-            if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
-                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + response.body().getHeaderTitle() + "</font>"));
-                textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
-                textViewheader.setPadding(30, 30, 80, 30);
-                textViewheader.setBackgroundResource(R.drawable.background_textview);
-                textViewheader.setLayoutParams(linearParams);
-
-                mButton = new FloatingActionButton(context);
-                mButton.setId((int) 0X101);
-                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).resize(600,600).into(mButton);
-
-                LinearLayout.LayoutParams linearParams1 = new LinearLayout.LayoutParams(
-                        LayoutParams.WRAP_CONTENT,
-                        LayoutParams.WRAP_CONTENT
-                );
-                mButton.setLayoutParams(linearParams1);
-                mButton.setOnClickListener(this);
-                linearLayout.setLayoutParams(bparams);
-                linearLayout.addView(textViewheader);
-                linearLayout.addView(mButton);
-
-
-                addView(linearLayout);
-
-                getButton();
-            }
-
-        }
-
-        if(response.body().getWidgetPosition().equalsIgnoreCase("right"))
-        {
-            LayoutParams bparams = new LayoutParams(
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT);
-            bparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             bparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
 
@@ -229,6 +178,100 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                 linearLayout.setLayoutParams(bparams);
                 linearLayout.addView(mButton);
                 linearLayout.addView(textViewheader);
+
+                addView(linearLayout);
+
+                getButton();
+            }
+
+        }
+
+        if(response.body().getWidgetPosition().equalsIgnoreCase("right"))
+        {
+            LayoutParams bparams = new LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT);
+            bparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            bparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+
+            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT
+            );
+            int valueMarginTop = 6;
+            int dpValueTopMargin = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    valueMarginTop, context.getResources().getDisplayMetrics());
+            linearParams.setMargins(0, 0, 0, dpValueTopMargin);
+            linearLayout = new LinearLayout(context);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            linearLayout.setLayoutParams(linearParams);
+            LinearLayout.LayoutParams linearParams1 = new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT
+            );
+            int valueMarginRight = 5;
+            int dpvalueMarginRight = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    valueMarginRight, context.getResources().getDisplayMetrics());
+            int valueMarginTopButton = 0;
+            int dpvalueMarginTopButton = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    valueMarginTopButton, context.getResources().getDisplayMetrics());
+            int valueMarginBottomButton = 1;
+            int dpvalueMarginBottomButton = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    valueMarginBottomButton, context.getResources().getDisplayMetrics());
+            linearParams1.setMargins(0, dpvalueMarginTopButton, dpvalueMarginRight, dpvalueMarginBottomButton);
+            textViewheader = new TextView(context);
+            textViewSubHeader = new TextView(context);
+            if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
+
+                textViewSubHeader.setText(response.body().getHeaderTitle());
+                String subHeading = textViewSubHeader.getText().toString();
+                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + subHeading + "</font>"));
+                textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
+
+                int value1 = 10;
+                int dpValueLeft = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        value1, context.getResources().getDisplayMetrics());
+
+                int value2 = 10;
+                int dpValueTop = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        value2,
+                        context.getResources().getDisplayMetrics());
+                int value3 = 30;
+                int dpValueRight = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        value3,
+                        context.getResources().getDisplayMetrics());
+                int value4 = 10;
+                int dpValueBottom = (int) TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        value4,
+                        context.getResources().getDisplayMetrics());
+                textViewheader.setPadding(dpValueLeft, dpValueTop, dpValueRight, dpValueBottom);
+                textViewheader.setBackgroundResource(R.drawable.background_textview);
+                textViewheader.setLayoutParams(linearParams);
+
+
+                mButton = new FloatingActionButton(context);
+                mButton.setId((int) 0X101);
+                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+
+                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+
+
+
+                mButton.setLayoutParams(linearParams1);
+                mButton.setOnClickListener(this);
+                linearLayout.setLayoutParams(bparams);
+                linearLayout.addView(textViewheader);
+                linearLayout.addView(mButton);
+
 
                 addView(linearLayout);
 
