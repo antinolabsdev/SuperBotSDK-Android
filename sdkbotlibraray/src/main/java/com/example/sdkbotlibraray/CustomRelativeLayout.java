@@ -182,7 +182,6 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     TypedValue.COMPLEX_UNIT_DIP,
                     valueMarginBottomButton, context.getResources().getDisplayMetrics());
             linearParams1.setMargins(dpvalueMarginLeft, dpvalueMarginTopButton, 0, dpvalueMarginBottomButton);
-
             textViewheader = new TextView(context);
             textViewSubHeader = new TextView(context);
             if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
