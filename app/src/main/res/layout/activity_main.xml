@@ -14,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="146dp"
         android:padding="5dp"
+        android:textColor="#000"
         android:paddingLeft="5dp"
         android:layout_marginEnd="8dp"
         android:text="EBPLMG1oKA"
@@ -34,6 +35,7 @@
         android:background="@drawable/background"
         android:padding="5dp"
         android:paddingLeft="5dp"
+        android:textColor="#000"
         android:text="hjMLEum5CPlgNx1T9IWlBlOaJZ4l4EObDY2Fw0JQ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +50,7 @@
         android:layout_marginStart="160dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
+        android:background="#02f042"
         android:text="GO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back" />

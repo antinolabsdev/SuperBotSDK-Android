@@ -78,7 +78,6 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     /*List<Post> posts = response.body();
                     for (Post post:posts)
                     {
-
                     }*/
                 }
 
@@ -106,11 +105,11 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginTop = 6;
-            int dpValueTopMargin = (int) TypedValue.applyDimension(
+            int valueMarginBottom = 20;
+            int dpValueBottomMargin = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTop, context.getResources().getDisplayMetrics());
-            linearParams.setMargins(0, 0, 0, dpValueTopMargin);
+                    valueMarginBottom, context.getResources().getDisplayMetrics());
+            linearParams.setMargins(0, 0, 0, dpValueBottomMargin);
             linearLayout = new LinearLayout(context);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setLayoutParams(linearParams);
@@ -118,7 +117,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginLeft = 5;
+            int valueMarginLeft = 20;
             int dpvalueMarginLeft = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
                     valueMarginLeft, context.getResources().getDisplayMetrics());
@@ -199,11 +198,11 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginTop = 6;
-            int dpValueTopMargin = (int) TypedValue.applyDimension(
+            int valueMarginBottom = 20;
+            int dpValueMarginBottom = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTop, context.getResources().getDisplayMetrics());
-            linearParams.setMargins(0, 0, 0, dpValueTopMargin);
+                    valueMarginBottom, context.getResources().getDisplayMetrics());
+            linearParams.setMargins(0, 0, 0, dpValueMarginBottom);
             linearLayout = new LinearLayout(context);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             linearLayout.setLayoutParams(linearParams);
@@ -211,10 +210,10 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginRight = 5;
+            int valueMarginRight1 = 20;
             int dpvalueMarginRight = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginRight, context.getResources().getDisplayMetrics());
+                    valueMarginRight1, context.getResources().getDisplayMetrics());
             int valueMarginTopButton = 0;
             int dpvalueMarginTopButton = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
@@ -302,4 +301,3 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
         }
     }
 }
-
