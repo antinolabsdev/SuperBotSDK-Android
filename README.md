@@ -25,8 +25,20 @@ Step 3 Write compileOptions in
 		targetCompatibility JavaVersion.VERSION_1_8
 	    }
 	}
+	
+Step 4 Write these line in our code 
+	
+	1.  Create the instance the of the custom layout
+	2.  Connected with the parent layout.
+	3.  Call the method of the custom layout and pass the parameter of action and secret
+	4   Add the view with customLayout.
+	
+	     CustomRelativeLayout relativeLayout = new CustomRelativeLayout(this);
+	     ConstraintLayout constraintLayout =  findViewById(R.id.parent);
+	     relativeLayout.init(action,secret);
+	     constraintLayout.addView(relativeLayout);
 
-Step 4 Added Internet permission
+Step 5 Added Internet permission
 
 	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
