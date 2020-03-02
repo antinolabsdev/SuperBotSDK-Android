@@ -30,7 +30,7 @@ Step 4 Write these line in our code
 	
 	1.  Create the instance the of the custom layout
 	2.  Connected with the parent layout.
-	3.  Call the method of the custom layout and pass the parameter of action and secret
+	3.  Call the method of the custom layout and pass the parameters action and secret
 	4   Add the view with customLayout.
 	
 	     CustomRelativeLayout relativeLayout = new CustomRelativeLayout(this);
