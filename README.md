@@ -3,7 +3,7 @@
   <img src="https://pinnacle.works/site/wp-content/uploads/revslider/home-w/superbots-1.png" alt="" data-ww="['500px','500px','406px','406px']" data-hh="['90px','90px','73px','73px']" width="500" height="90" data-no-retina="" style="width: 322.984px; height: 58.1371px; transition: none 0s ease 0s; text-align: inherit; line-height: 0px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 8px;">
 </p>
 <h1>Live Chat Android SDK from Pinnacle</h1>
-<h2>  Live Chat for your mobile apps. Integrate painlessly the Live Chat for your customer support inside any Android App with  <a href="https://pinnacle.works/solutions/superbot/">SuperBot Live Chat </a>  SDK </h2>
+<h2>  Live Chat for your mobile apps. Integrate painlessly the Live Chat for your customer support inside any Android App with  <a href="https://pinnacle.works/solutions/superbot/">SuperBot Live Chat SDK</a> </h2>
 
   [![Android API23+](https://img.shields.io/badge/Android-API_23+-green.svg)]()
   [![Java 6+](https://img.shields.io/badge/Java-6+-red.svg)]()
@@ -90,5 +90,5 @@ Add it in your root build.gradle at the end of repositories:
 Made with ❤️ by [Antino Labs](https://www.antino.io/) and [PinnacleWorks](https://pinnacle.works/).
 
 ## License
-SuperBot is released under the MIT license. [See LICENSE](https://github.com/antinolabsdev/librarybotsdk/blob/master/LICENSE) for details.
+SuperBot is released under the MIT license. [See LICENSE](https://github.com/antinolabsdev/SuperBotSDK-Android/blob/master/LICENSE) for details.
 
