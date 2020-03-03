@@ -5,7 +5,7 @@
 <h1>Live Chat Android SDK from Pinnacle</h1>
 <h2>  Live Chat for your mobile apps. Integrate painlessly the Live Chat for your customer support inside any Android App with  <a href="https://pinnacle.works/solutions/superbot/">SuperBot Live Chat </a>  SDK </h2>
 
-  [![Android API23+](https://img.shields.io/badge/Android-API_14+-green.svg)]()
+  [![Android API23+](https://img.shields.io/badge/Android-API_23+-green.svg)]()
   [![Java 6+](https://img.shields.io/badge/Java-6+-red.svg)]()
   [![License Apache 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-red.svg)]()
 
