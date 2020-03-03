@@ -3,24 +3,21 @@ package com.example.sdkbotlibraray;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.GravityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -40,6 +37,8 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
     private float TextHeadersize;
     private TextView textViewheader , textViewSubHeader;
     private Response<Post> responseGlob;
+    private int value1,value2,value3,value4;
+    private int marginbottom,marginup,marginleft,marginRight;
     private String android_id = Settings.Secure.getString(getContext().getContentResolver(),
             Settings.Secure.ANDROID_ID);
 
@@ -50,11 +49,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
 
     }
 
-    /**
-     *
-     * @param account
-     * @param secret
-     */
+
     public void init(String account, String secret) {
         Log.e("Response", android_id);
         Retrofit retrofit = new Retrofit.Builder()
@@ -73,7 +68,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                 if (response.isSuccessful()) {
                     responseGlob = response;
                     Log.d("*1234*","My response"+ response.body());
-                    initViews(response);
+                    initViews(responseGlob);
 
                     /*List<Post> posts = response.body();
                     for (Post post:posts)
@@ -90,6 +85,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             }
         });
     }
+
     private void initViews(Response<Post> response) {
 
         if(response.body().getWidgetPosition().equalsIgnoreCase("left"))
@@ -100,88 +96,84 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             bparams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             bparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 
-
-            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams linearParamTextviewLinearLayout = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginBottom = 20;
+            //This parameter is used for button when chatbox is not visible
+            LinearLayout.LayoutParams buttonMarginWithoutBubbleParams= new LinearLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT
+            );
+            marginleft=25;
+            marginbottom=25;
+            int dpMarginButtonWithoutBubbleLeft = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,marginleft,context.getResources().getDisplayMetrics());
+            int dpMarginButtonWithoutBubbleBottom = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,marginbottom,context.getResources().getDisplayMetrics());
+            buttonMarginWithoutBubbleParams.setMargins(dpMarginButtonWithoutBubbleLeft,0,0,dpMarginButtonWithoutBubbleBottom);
+
+
             int dpValueBottomMargin = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginBottom, context.getResources().getDisplayMetrics());
-            linearParams.setMargins(0, 0, 0, dpValueBottomMargin);
+                    marginbottom, context.getResources().getDisplayMetrics());
+            linearParamTextviewLinearLayout.setMargins(0, 0, 0, dpValueBottomMargin);
+
             linearLayout = new LinearLayout(context);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-            linearLayout.setLayoutParams(linearParams);
+            linearLayout.setLayoutParams(linearParamTextviewLinearLayout);
             LinearLayout.LayoutParams linearParams1 = new LinearLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginLeft = 20;
+            marginleft = 20;
             int dpvalueMarginLeft = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginLeft, context.getResources().getDisplayMetrics());
-            int valueMarginTopButton = 0;
-            int dpvalueMarginTopButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTopButton, context.getResources().getDisplayMetrics());
-            int valueMarginBottomButton = 1;
-            int dpvalueMarginBottomButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginBottomButton, context.getResources().getDisplayMetrics());
-            linearParams1.setMargins(dpvalueMarginLeft, dpvalueMarginTopButton, 0, dpvalueMarginBottomButton);
-            textViewheader = new TextView(context);
-            textViewSubHeader = new TextView(context);
+                    marginleft, context.getResources().getDisplayMetrics());
+            linearParams1.setMargins(dpvalueMarginLeft, 0, 0, 0);
+            mButton = new FloatingActionButton(context);
+            mButton.setId((int) 0X101);
+            mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+            Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+            mButton.setOnClickListener(this);
+            mButton.setLayoutParams(buttonMarginWithoutBubbleParams);
+            linearLayout.setLayoutParams(bparams);
+            linearLayout.addView(mButton);
+
+
             if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
-
-                textViewSubHeader.setText(response.body().getHeaderTitle());
-                String subHeading = textViewSubHeader.getText().toString();
-                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + subHeading + "</font>"));
+                textViewheader = new TextView(context);
+                textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + response.body().getHeaderTitle() + "</font>"));
                 textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
-
-                int value1 = 30;
+                value1 = 30;
                 int dpValueLeft = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value1, context.getResources().getDisplayMetrics());
 
-                int value2 = 10;
+                value2 = 12;
                 int dpValueTop = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value2,
                         context.getResources().getDisplayMetrics());
-                int value3 = 10;
+                value3 = 10;
                 int dpValueRight = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value3,
                         context.getResources().getDisplayMetrics());
-                int value4 = 10;
+                value4 = 12;
                 int dpValueBottom = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value4,
                         context.getResources().getDisplayMetrics());
                 textViewheader.setPadding(dpValueLeft, dpValueTop, dpValueRight, dpValueBottom);
                 textViewheader.setBackgroundResource(R.drawable.background_left_textview);
-                textViewheader.setLayoutParams(linearParams);
-
-
-                mButton = new FloatingActionButton(context);
-                mButton.setId((int) 0X101);
-                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-
-                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
-
-
-
-                mButton.setLayoutParams(linearParams1);
-                mButton.setOnClickListener(this);
-                linearLayout.setLayoutParams(bparams);
-                linearLayout.addView(mButton);
+                textViewheader.setLayoutParams(linearParamTextviewLinearLayout);
                 linearLayout.addView(textViewheader);
 
-                addView(linearLayout);
 
-                getButton();
             }
+
+            addView(linearLayout);
+
+            getButton();
 
         }
 
@@ -198,7 +190,8 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginBottom = 20;
+
+            int valueMarginBottom = 15;
             int dpValueMarginBottom = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
                     valueMarginBottom, context.getResources().getDisplayMetrics());
@@ -210,19 +203,11 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT
             );
-            int valueMarginRight1 = 20;
+            int valueMarginRight1 = 15;
             int dpvalueMarginRight = (int) TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
                     valueMarginRight1, context.getResources().getDisplayMetrics());
-            int valueMarginTopButton = 0;
-            int dpvalueMarginTopButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginTopButton, context.getResources().getDisplayMetrics());
-            int valueMarginBottomButton = 1;
-            int dpvalueMarginBottomButton = (int) TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    valueMarginBottomButton, context.getResources().getDisplayMetrics());
-            linearParams1.setMargins(0, dpvalueMarginTopButton, dpvalueMarginRight, dpvalueMarginBottomButton);
+            linearParams1.setMargins(0, 0, dpvalueMarginRight, dpValueMarginBottom);
             textViewheader = new TextView(context);
             textViewSubHeader = new TextView(context);
             if (response.body().getChatBoxBubble().equalsIgnoreCase("1")) {
@@ -232,51 +217,45 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                 textViewheader.setText(Html.fromHtml("<b>" + response.body().getHeaderSubtitle() + "</b><br>" + "<font color=" + "darkgrey" + ">" + subHeading + "</font>"));
                 textViewheader.setTextColor(Color.parseColor(response.body().getTextColor()));
 
-                int value1 = 10;
-                int dpValueLeft = (int) TypedValue.applyDimension(
+                 value1 = 10;
+                int dpValueLeftPadding = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value1, context.getResources().getDisplayMetrics());
 
-                int value2 = 10;
-                int dpValueTop = (int) TypedValue.applyDimension(
+                 value2 = 12;
+                int dpValueTopPadding = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value2,
                         context.getResources().getDisplayMetrics());
-                int value3 = 30;
-                int dpValueRight = (int) TypedValue.applyDimension(
+                value3 = 30;
+                int dpValueRightPadding = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value3,
                         context.getResources().getDisplayMetrics());
-                int value4 = 10;
-                int dpValueBottom = (int) TypedValue.applyDimension(
+                value4 = 12;
+                int dpValueBottomPadding = (int) TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP,
                         value4,
                         context.getResources().getDisplayMetrics());
-                textViewheader.setPadding(dpValueLeft, dpValueTop, dpValueRight, dpValueBottom);
+                textViewheader.setPadding(dpValueLeftPadding, dpValueTopPadding, dpValueRightPadding, dpValueBottomPadding);
                 textViewheader.setBackgroundResource(R.drawable.background_textview);
                 textViewheader.setLayoutParams(linearParams);
-
-
-                mButton = new FloatingActionButton(context);
-                mButton.setId((int) 0X101);
-                mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-
-
-                Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
-
-
-
-                mButton.setLayoutParams(linearParams1);
-                mButton.setOnClickListener(this);
-                linearLayout.setLayoutParams(bparams);
                 linearLayout.addView(textViewheader);
-                linearLayout.addView(mButton);
-
-
-                addView(linearLayout);
-
-                getButton();
             }
+            mButton = new FloatingActionButton(context);
+            mButton.setId((int) 0X101);
+            mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+            Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+            mButton.setLayoutParams(linearParams1);
+            mButton.setOnClickListener(this);
+            linearLayout.setLayoutParams(bparams);
+
+            linearLayout.addView(mButton);
+
+
+            addView(linearLayout);
+
+            getButton();
 
         }
 
