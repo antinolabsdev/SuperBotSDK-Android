@@ -1,18 +1,34 @@
 <p align="left">
-<a href="http://www.customerly.io">
+<a href="https://pinnacle.works">
   <img src="https://pinnacle.works/site/wp-content/uploads/revslider/home-w/superbots-1.png" alt="" data-ww="['500px','500px','406px','406px']" data-hh="['90px','90px','73px','73px']" width="500" height="90" data-no-retina="" style="width: 322.984px; height: 58.1371px; transition: none 0s ease 0s; text-align: inherit; line-height: 0px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 0px; font-weight: 400; font-size: 8px;">
 </p>
 <h1>Live Chat Android SDK from Pinnacle</h1>
+<h2>  Live Chat for your mobile apps. Integrate painlessly the Live Chat for your customer support inside any Android App with  <a href="https://pinnacle.works/solutions/superbot/">SuperBot Live Chat </a>  SDK </h2>
+
+  [![Android API14+](https://img.shields.io/badge/Android-API_14+-green.svg)]()
+  [![Java 6+](https://img.shields.io/badge/Java-6+-red.svg)]()
+  [![License Apache 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-red.svg)]()
+
+**SuperBot** is the most complete <strong>Live Chat</strong> AI-driven Omni-channel conversation platform developed with the help of technologies like Machine Learning and Artificial Intelligence powered by Google Algorithms for assisting organizations to attend their online queries. 
+
+The Bot’s intelligence is backed by high data analytics and research.The AI technology used, makes it smarter every second, as it empowers the Bot with a Self-Learning Capability. 
+
+The SuperBot Live Chat iOS SDK is really simple to integrate in your apps, and allow your users to contact you via chat.
+
+<p align="center">
+  <img src="https://pinnacle.works/site/wp-content/uploads/revslider/newsb/phone-1.png" width=300 alt="Live Chat Help Desk ios SDK "/>
+</p>
 
 ## Features
-
-- [x] Register your users
+- [x] Support via live chat in real time
 - [x] Set attributes
-- [x] Track events
-- [x] Support via chat in real time
-- [x] Surveys
-- [x] English & Italian localizations
+- [x] Self Learning
+- [x] High Response Rate
+- [x] Multi User Handling
+- [x] Unlimited Information Storage
+- [x] Objective-C compatibility
 - [x] Many more is coming....
+
 ## Requirements
 
 - Android Lollipop, 5.1 (API level 14+)
@@ -62,8 +78,17 @@ Step 5 Added Internet permission
 
 	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	 
+## Contributing
+
+- If you **need help** or you'd like to **ask a general question**, open an issue or contact our support on [SuperBot](https://pinnacle.works/solutions/superbot/)
+- If you **found a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
 	 
 ## Acknowledgements
 
-Made with ❤️ by [Prakhar Pandey](https://www.linkedin.com/in/prakhar-pandey-59a79616a/) for Antino.
+Made with ❤️ by [Antino Labs](https://www.antino.io/) and [PinnacleWorks](https://pinnacle.works/).
+
+## License
+SuperBot is released under the MIT license. [See LICENSE](https://github.com/antinolabsdev/SuperBotSDK/blob/master/LICENSE) for details.
 
