@@ -6,7 +6,7 @@
 <h2>  Live Chat for your mobile apps. Integrate painlessly the Live Chat for your customer support inside any Android App with  <a href="https://pinnacle.works/solutions/superbot/">SuperBot Live Chat </a>  SDK </h2>
 
   [![Android API23+](https://img.shields.io/badge/Android-API_14+-green.svg)]()
-  [![Java 7+](https://img.shields.io/badge/Java-6+-red.svg)]()
+  [![Java 6+](https://img.shields.io/badge/Java-6+-red.svg)]()
   [![License Apache 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-red.svg)]()
 
 **SuperBot** is the most complete <strong>Live Chat</strong> AI-driven Omni-channel conversation platform developed with the help of technologies like Machine Learning and Artificial Intelligence powered by Google Algorithms for assisting organizations to attend their online queries. 
@@ -26,12 +26,12 @@ The SuperBot Live Chat Android SDK is really simple to integrate in your apps, a
 - [x] High Response Rate
 - [x] Multi User Handling
 - [x] Unlimited Information Storage
-- [x] Objective-C compatibility
+- [x] Java 8 compatibility
 - [x] Many more is coming....
 
 ## Requirements
 
-- Android Lollipop, 5.1 (API level 14+)
+- Android Lollipop, 5.1 (API level 23+)
 - Android Studio 2.0+
 - Java 7+
 (Pinnacle Works also with pure Java projects)
