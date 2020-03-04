@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sdkbotlibraray">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <application>
+
+        <activity android:name=".WebViewActivity"
+            android:windowSoftInputMode="stateAlwaysVisible"
+            >
+        </activity>
+
+    </application>
+
+</manifest>
