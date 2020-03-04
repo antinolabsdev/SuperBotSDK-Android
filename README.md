@@ -33,13 +33,13 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-## Step 2 Add the dependency
+## Step 2. Add the dependency
 
 	dependencies {
 	        implementation 'com.github.antinolabsdev:librarybotsdk:1.1'
 	}
   
-## Step 3 Write compileOptions in
+## Step 3. Write compileOptions in
 
 	android{
 	  compileOptions {
@@ -48,7 +48,7 @@ Add it in your root build.gradle at the end of repositories:
 	    }
 	}
 	
-## Step 4 Write these line in our code 
+## Step 4. Write these line in our code 
 	
 	1.  Create the instance the of the custom layout
 	2.  Connected with the parent layout.
@@ -60,7 +60,7 @@ Add it in your root build.gradle at the end of repositories:
 	     relativeLayout.init(action,secret);
 	     constraintLayout.addView(relativeLayout);
 
-## Step 5 Added Internet permission in Mainfest
+## Step 5. Added Internet permission in Mainfest
 
 	 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	 
