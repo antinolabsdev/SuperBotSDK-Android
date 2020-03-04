@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.graphics.Color;
 import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
@@ -25,9 +26,7 @@ import androidx.core.view.GravityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-
 import java.io.InputStream;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -138,11 +137,14 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             mButton = new FloatingActionButton(context);
             mButton.setId((int) 0X101);
             mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+
             String currentImage =response.body().getBaseUrl() + "/" + response.body().getIcon() ;
             if(currentImage!=null)
             {
                 new DownloadImageTask(mButton).execute(currentImage);
             }
+            Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+
             mButton.setOnClickListener(this);
             mButton.setLayoutParams(buttonMarginWithoutBubbleParams);
             linearLayout.setLayoutParams(bparams);
@@ -262,6 +264,7 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
            // Picasso.get().load().into(mButton);
             mButton.setScaleType(ImageView.ScaleType.CENTER);
+            mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
             mButton.setLayoutParams(linearParams1);
             mButton.setOnClickListener(this);
             linearLayout.setLayoutParams(bparams);
