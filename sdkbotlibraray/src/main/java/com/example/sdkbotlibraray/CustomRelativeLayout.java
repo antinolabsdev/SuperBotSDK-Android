@@ -138,7 +138,11 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             mButton = new FloatingActionButton(context);
             mButton.setId((int) 0X101);
             mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-            Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+            String currentImage =response.body().getBaseUrl() + "/" + response.body().getIcon() ;
+            if(currentImage!=null)
+            {
+                new DownloadImageTask(mButton).execute(currentImage);
+            }
             mButton.setOnClickListener(this);
             mButton.setLayoutParams(buttonMarginWithoutBubbleParams);
             linearLayout.setLayoutParams(bparams);
