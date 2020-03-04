@@ -15,20 +15,6 @@ The Bot’s intelligence is backed by high data analytics and research.The AI te
 
 The SuperBot Live Chat Android SDK is really simple to integrate in your apps, and allow your users to contact you via chat.
 
-<p align="center">
-  <img src="https://pinnacle.works/site/wp-content/uploads/revslider/newsb/phone-1.png" width=300 alt="Live Chat Help Desk ios SDK "/>
-</p>
-
-## Features
-- [x] Support via live chat in real time
-- [x] Set attributes
-- [x] Self Learning
-- [x] High Response Rate
-- [x] Multi User Handling
-- [x] Unlimited Information Storage
-- [x] Java 8 compatibility
-- [x] Many more is coming....
-
 ## Requirements
 
 - Android Lollipop, 5.1 (API level 23+)
