@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+<<<<<<< HEAD
+    <mapping directory="$PROJECT_DIR$/superbot-sdk-for-android" vcs="Git" />
+=======
+>>>>>>> 51f14cd062591c8f52cc3bc98c13b4b6850fc247
   </component>
 </project>

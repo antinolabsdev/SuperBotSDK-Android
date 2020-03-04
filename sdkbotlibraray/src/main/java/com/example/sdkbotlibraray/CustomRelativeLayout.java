@@ -3,6 +3,10 @@ package com.example.sdkbotlibraray;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.graphics.Color;
 import android.provider.Settings;
 import android.text.Html;
@@ -12,6 +16,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,7 +26,7 @@ import androidx.core.view.GravityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-
+import java.io.InputStream;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -132,7 +137,14 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             mButton = new FloatingActionButton(context);
             mButton.setId((int) 0X101);
             mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
+
+            String currentImage =response.body().getBaseUrl() + "/" + response.body().getIcon() ;
+            if(currentImage!=null)
+            {
+                new DownloadImageTask(mButton).execute(currentImage);
+            }
             Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+
             mButton.setOnClickListener(this);
             mButton.setLayoutParams(buttonMarginWithoutBubbleParams);
             linearLayout.setLayoutParams(bparams);
@@ -244,8 +256,15 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
             }
             mButton = new FloatingActionButton(context);
             mButton.setId((int) 0X101);
+            String currentImage =response.body().getBaseUrl() + "/" + response.body().getIcon() ;
+            if(currentImage!=null)
+            {
+                new DownloadImageTask(mButton).execute(currentImage);
+            }
             mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
-            Picasso.get().load(response.body().getBaseUrl() + "/" + response.body().getIcon()).into(mButton);
+           // Picasso.get().load().into(mButton);
+            mButton.setScaleType(ImageView.ScaleType.CENTER);
+            mButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(response.body().getMainColor())));
             mButton.setLayoutParams(linearParams1);
             mButton.setOnClickListener(this);
             linearLayout.setLayoutParams(bparams);
@@ -277,6 +296,41 @@ public class CustomRelativeLayout extends RelativeLayout implements View.OnClick
                 break;
             case 0X102:
                 break;
+        }
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        FloatingActionButton actionButton;
+        public DownloadImageTask(FloatingActionButton mButton) {
+            this.actionButton=mButton;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            String urldisplay = strings[0];
+
+            Bitmap bmp = null;
+
+            try {
+
+                InputStream in = new java.net.URL(urldisplay).openStream();
+
+                bmp = BitmapFactory.decodeStream(in);
+
+            } catch (Exception e) {
+
+                Log.e("Error", e.getMessage());
+
+                e.printStackTrace();
+
+            }
+
+            return bmp;
+        }
+        protected void onPostExecute(Bitmap result) {
+
+            actionButton.setImageBitmap(result);
+
         }
     }
 }

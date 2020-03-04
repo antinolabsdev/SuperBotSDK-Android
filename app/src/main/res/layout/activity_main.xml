@@ -17,7 +17,7 @@
         android:textColor="#000"
         android:paddingLeft="5dp"
         android:layout_marginEnd="8dp"
-        android:text="EBPLMG1oKA"
+        android:text="bZm18BXLDz"
         android:background="@drawable/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:padding="5dp"
         android:paddingLeft="5dp"
         android:textColor="#000"
-        android:text="hjMLEum5CPlgNx1T9IWlBlOaJZ4l4EObDY2Fw0JQ"
+        android:text="2Ipn0kN07rKeR0QnXK0nQCFXPmU28glCJHJkoTlW"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter1">
